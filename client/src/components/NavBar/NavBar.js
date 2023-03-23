@@ -3,18 +3,9 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logUserOut } from "../../reducers/loginReducer";
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  AppBar, Toolbar, Container, Box, Button, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuItemOption, MenuGroup, MenuOptionGroup, MenuDivider, Text, Tooltip, Avatar
+} from "@chakra-ui/react";
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -77,14 +68,14 @@ const NavBar = () => {
               }}
             >
               <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Blogs</Typography>
+                <Text textAlign="center">Blogs</Text>
               </MenuItem>
               <MenuItem
                 component={Link}
                 to="/users"
                 onClick={handleCloseNavMenu}
               >
-                <Typography textAlign="center">Users</Typography>
+                <Text textAlign="center">Users</Text>
               </MenuItem>
             </Menu>
           </Box>
@@ -131,9 +122,9 @@ const NavBar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={handleLogout}>
+                <Text textAlign="center" onClick={handleLogout}>
                   Logout
-                </Typography>
+                </Text>
               </MenuItem>
             </Menu>
           </Box>

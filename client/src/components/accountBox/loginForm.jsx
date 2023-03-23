@@ -4,23 +4,7 @@ import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useDispatch } from "react-redux";
 import { logUserIn } from "../../reducers/loginReducer";
-import { Card } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-    margin: "auto",
-    marginTop: 50,
-    padding: 20,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "#df0",
-    boxShadow: "0px 3px 6px rgba(0,0,0,0.16)",
-    borderRadius: 8,
-  },
-});
+import { Card } from "@chakra-ui/react";
 
 export function LoginForm() {
   const { switchToSignup } = useContext(AccountContext);
@@ -49,10 +33,9 @@ export function LoginForm() {
     setPassword();
   };
 
-  const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <BoxContainer>
         <FormContainer onSubmit={handleLogin}>
           <Marginer direction="vertical" margin="3em" />

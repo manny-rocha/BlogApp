@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container } from "@mui/material";
+import { Container } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 
 import BlogList from "./components/Blog/BlogList";

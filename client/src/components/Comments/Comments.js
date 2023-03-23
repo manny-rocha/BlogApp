@@ -1,7 +1,7 @@
 import { useField } from "../../hooks/index";
 import { useDispatch } from "react-redux";
 import { createComment } from "../../reducers/blogReducer";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, Textarea } from "@chakra-ui/react";
 
 const Comments = ({ blog }) => {
   const { reset: resetComment, ...comment } = useField("text");
@@ -25,7 +25,7 @@ const Comments = ({ blog }) => {
       <form onSubmit={handleComment}>
         <Grid container>
           <Grid item>
-            <TextField label="write your thoughts" size="small" {...comment} />
+            <Textarea label="write your thoughts" size="small" {...comment} />
           </Grid>
           <Grid item alignItems="stretch" style={{ display: "flex" }}>
             <Button variant="contained" color="primary" type="submit">

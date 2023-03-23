@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../reducers/blogReducer";
 import { Input } from "../accountBox/common";
-import { Button } from "@mui/material";
+import { Button } from "@chakra-ui/react";
 
 // import "./formStyles.css";
 
