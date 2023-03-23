@@ -15,8 +15,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ff5;
-  padding: 60px 10px;
+  background-color: #2980B9;
+  padding: 80px 20px;
   border-radius: 15px;
   box-shadow: 0px 0px 2.5px rgbs(15, 15, 15, 0.19);
 `;
@@ -41,22 +41,24 @@ export const Input = styled.input`
   height: 42px;
   outline: none;
   border: 1px solid rgba(200, 200, 200, 0.3);
+  border-radius: 5px 5px 5px 5px;
   padding: 0px 10px;
   transition: all 200ms ease-in-out;
-  /* border-bottom: 1.4px solid transparent; */
+  border-bottom: 1.4px solid transparent;
   font-size: 12px;
 
   &::placeholder {
     color: rgba(200, 200, 200, 1);
   }
 
-  /* &:not(:last-of-type) {
+  &:not(:last-of-type) {
     border-bottom: 1.4px solid rgba(200, 200, 200, 0.3);
-  } */
+    margin-bottom: 10px;
+  } 
 
   &:focus {
     outline: none;
-    border-bottom: 2px solid rgb(192,57,43);
+    border-bottom: 2px solid #3498DB;
   }
 `;
 

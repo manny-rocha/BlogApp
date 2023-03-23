@@ -4,7 +4,8 @@ import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useDispatch } from "react-redux";
 import { logUserIn } from "../../reducers/loginReducer";
-import { Card, makeStyles } from "@mui/material";
+import { Card } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   root: {

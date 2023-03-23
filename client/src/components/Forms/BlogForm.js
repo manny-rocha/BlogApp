@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../reducers/blogReducer";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
+import { Input } from "../accountBox/common";
+import { Button } from "@mui/material";
 
 // import "./formStyles.css";
 
@@ -36,19 +36,19 @@ const BlogForm = ({ togglableRef }) => {
       <form onSubmit={handleCreateBlog}>
         <div>
           <span className="p-float-label">
-            <InputText id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <label htmlFor="title">Title</label>
           </span>
         </div>
         <div>
           <span className="p-float-label">
-            <InputText id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+            <Input id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
             <label htmlFor="author">Author</label>
           </span>
         </div>
         <div>
           <span className="p-float-label">
-            <InputText id="url" value={url} onChange={(e) => setUrl(e.target.value)} />
+            <Input id="url" value={url} onChange={(e) => setUrl(e.target.value)} />
             <label htmlFor="url">URL</label>
           </span>
         </div>

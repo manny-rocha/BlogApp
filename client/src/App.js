@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 
-import BlogList from "./components/BlogList";
-import LoginForm from "./components/LoginForm";
-import Notification from "./components/Notification";
-import NavBar from "./components/NavBar";
-import Blog from "./components/Blog";
-import Users from "./components/Users";
-import User from "./components/User";
-import Togglable from "./components/Togglable";
-import BlogForm from "./components/BlogForm";
-import Greeting from "./components/Greeting";
+import BlogList from "./components/Blog/BlogList";
+import LoginForm from "./components/accountBox/loginForm";
+import Notification from "./components/Notification/Notification";
+import NavBar from "./components/NavBar/NavBar";
+import Blog from "./components/Blog/Blog";
+import Users from "./components/User/Users";
+import User from "./components/User/User";
+import Togglable from "./components/Togglable/Togglable";
+import BlogForm from "./components/Forms/BlogForm";
+import Greeting from "./components/Greeting/Greeting";
 
 import userService from "./services/users";
 
