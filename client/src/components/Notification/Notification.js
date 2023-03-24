@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Alert } from "@mui/material";
+import { Alert } from "@chakra-ui/react";
 
 const Notification = () => {
   const notification = useSelector((state) => state.notification);

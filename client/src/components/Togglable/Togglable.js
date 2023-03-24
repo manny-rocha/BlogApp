@@ -1,6 +1,6 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { Button } from "@mui/material";
+import { Button } from "@chakra-ui/react";
 
 const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);

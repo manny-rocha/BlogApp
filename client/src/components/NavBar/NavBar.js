@@ -4,12 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { logUserOut } from "../../reducers/loginReducer";
 
 import {
-  AppBar, Toolbar, Container, Box, Button, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuItemOption, MenuGroup, MenuOptionGroup, MenuDivider, Text, Tooltip, Avatar
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Text,
+  Tooltip,
+  Avatar,
+  Flex,
+  MenuGroup,
 } from "@chakra-ui/react";
 
+import { HamburgerIcon } from "@chakra-ui/icons";
+
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,118 +28,57 @@ const NavBar = () => {
     navigate("/");
   };
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
-                <Text textAlign="center">Blogs</Text>
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to="/users"
-                onClick={handleCloseNavMenu}
-              >
-                <Text textAlign="center">Users</Text>
-              </MenuItem>
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              component={Link}
-              to="/"
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              blogs
-            </Button>
-            <Button
-              component={Link}
+    <Box>
+      <Flex alignItems="center" py={2}>
+        <Box display={{ base: "block", md: "none" }}>
+          <IconButton
+            size="md"
+            fontSize="lg"
+            aria-label="Open menu"
+            icon={<HamburgerIcon />}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          <Menu
+            onClose={() => setIsOpen(false)}
+            isOpen={isOpen}
+            placement="bottom-end"
+          >
+            <MenuItem as={Link} to="/" onClick={() => setIsOpen(false)}>
+              Blogs
+            </MenuItem>
+            <MenuItem
+              as={Link}
               to="/users"
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              onClick={() => setIsOpen(false)}
             >
-              users
-            </Button>
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Text textAlign="center" onClick={handleLogout}>
+              Users
+            </MenuItem>
+          </Menu>
+        </Box>
+        <Box sx={{ flexGrow: 0 }}>
+          <Tooltip label="Open settings">
+            <IconButton onClick={console.log("handleOpenUserMenu")} sx={{ p: 0 }}>
+              <Avatar />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            placement="bottom-end"
+          >
+            <MenuGroup title="User">
+              <MenuItem onClick={handleLogout}>
+                <Text textAlign="center">
                   Logout
                 </Text>
               </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            </MenuGroup>
+          </Menu>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
+
 export default NavBar;

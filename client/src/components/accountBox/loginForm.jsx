@@ -1,13 +1,14 @@
-import { useState, useContext } from "react";
+import { useState, } from "react";
 import { BoxContainer, FormContainer, Input, SubmitButton, MutedLink, BoldLink } from "./common";
 import { Marginer } from "../marginer";
-import { AccountContext } from "./accountContext";
+// import { AccountContext } from "./accountContext";
 import { useDispatch } from "react-redux";
 import { logUserIn } from "../../reducers/loginReducer";
-import { Card } from "@chakra-ui/react";
+import { Card, CardBody } from "@chakra-ui/react";
+import "./login.styles.css";
 
 export function LoginForm() {
-  const { switchToSignup } = useContext(AccountContext);
+  // const { switchToSignup } = useContext(AccountContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,20 +36,22 @@ export function LoginForm() {
 
 
   return (
-    <Card>
-      <BoxContainer>
-        <FormContainer onSubmit={handleLogin}>
-          <Marginer direction="vertical" margin="3em" />
-          <Input name="username" type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
-          <Input name="password" type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+    <Card className="loginCard">
+      <CardBody className="loginBody">
+        <BoxContainer>
+          <FormContainer onSubmit={handleLogin}>
+            <Marginer direction="vertical" margin="3em" />
+            <Input name="username" type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+            <Input name="password" type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+            <Marginer direction="vertical" margin="1em" />
+            <SubmitButton type="submit">Login</SubmitButton>
+          </FormContainer>
           <Marginer direction="vertical" margin="1em" />
-          <SubmitButton type="submit">Login</SubmitButton>
-        </FormContainer>
-        <Marginer direction="vertical" margin="1em" />
-        <MutedLink href="#">Forgot your password?</MutedLink>
-        <Marginer direction="vertical" margin="1.6em" />
-        <MutedLink href="#">Don&apos;t have an account? <BoldLink href="#" onClick={switchToSignup}>Sign Up</BoldLink></MutedLink>
-      </BoxContainer>
+          <MutedLink href="#">Forgot your password?</MutedLink>
+          <Marginer direction="vertical" margin="1.6em" />
+          <MutedLink href="#">Don&apos;t have an account? <BoldLink href="#" onClick={console.log("switchToSignup")}>Sign Up</BoldLink></MutedLink>
+        </BoxContainer>
+      </CardBody>
     </Card>
   );
 }

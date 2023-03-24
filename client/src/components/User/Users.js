@@ -3,45 +3,43 @@ import { Link } from "react-router-dom";
 
 import {
   Table,
-  TableHead,
-  TableBody,
-  TableCell,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
   TableContainer,
-  TableRow,
-  Paper,
-} from "@mui/material";
+} from "@chakra-ui/react";
 
 const Users = () => {
   const users = useSelector((state) => state.users);
 
   return (
-    <div>
+    <TableContainer>
       <h2>Users</h2>
-      <TableContainer sx={{ minWidth: 250 }} component={Paper}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <strong>Name</strong>
-              </TableCell>
-              <TableCell align="right">
-                <strong>Blogs created</strong>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>
-                  <Link to={`/users/${user.id}`}>{user.username}</Link>
-                </TableCell>
-                <TableCell align="right">{user.blogs.length}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+      <Table size="sm">
+        <Thead>
+          <Tr>
+            <Th>
+              <strong>Name</strong>
+            </Th>
+            <Th textAlign="right">
+              <strong>Blogs created</strong>
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {users.map((user) => (
+            <Tr key={user.id}>
+              <Td>
+                <Link to={`/users/${user.id}`}>{user.username}</Link>
+              </Td>
+              <Td textAlign="right">{user.blogs.length}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
   );
 };
 

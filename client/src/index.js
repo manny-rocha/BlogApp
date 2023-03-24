@@ -9,11 +9,13 @@ import store from "./store";
 import { ChakraProvider } from "@chakra-ui/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ChakraProvider>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </ChakraProvider>
+  <div className="baseLayer">
+    <ChakraProvider>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </ChakraProvider>
+  </div>
 );

@@ -2,14 +2,7 @@ import { useSelector } from "react-redux";
 import { orderBy } from "lodash";
 import { Link } from "react-router-dom";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Paper,
-} from "@mui/material";
+import { Table, Thead, Tbody, Tr, Th, Td, Box } from "@chakra-ui/react";
 
 const BlogList = () => {
   const blogs = useSelector((state) => state.blogs);
@@ -17,39 +10,28 @@ const BlogList = () => {
   const sortedBlogs = orderBy(blogs, ["likes"], ["desc"]);
 
   return (
-    <div>
-      <h2>Blogs</h2>
-      <TableContainer id="bloglist" component={Paper}>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Author</TableCell>
-              <TableCell>Likes</TableCell>
-            </TableRow>
-            {sortedBlogs.map((blog) => (
-              <TableRow key={blog.id}>
-                <TableCell>
-                  <Link to={`/blogs/${blog.id}`}>
-                    {blog.title}
-                  </Link>
-                </TableCell>
-                <TableCell>
-                  <div>
-                    {blog.author}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div>
-                    {blog.likes}
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer >
-    </div >
+    <Box>
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Title</Th>
+            <Th>Author</Th>
+            <Th>Likes</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {sortedBlogs.map((blog) => (
+            <Tr key={blog.id}>
+              <Td>
+                <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+              </Td>
+              <Td>{blog.author}</Td>
+              <Td>{blog.likes}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </Box>
   );
 };
 

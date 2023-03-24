@@ -39,11 +39,7 @@ const App = () => {
   }, []);
 
   if (user === null) {
-    return (
-      <Container>
-        <LoginForm />
-      </Container>
-    );
+    return <LoginForm />;
   }
 
   return (
