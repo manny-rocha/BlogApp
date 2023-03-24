@@ -26,13 +26,15 @@ export function LoginForm() {
     event.preventDefault();
 
     const credentials = {
-      username: username.valueOf,
-      password: password.valueOf,
+      username,
+      password,
     };
+
     dispatch(logUserIn(credentials));
-    setUsername();
-    setPassword();
+    setUsername("");
+    setPassword("");
   };
+
 
 
   return (
@@ -48,8 +50,9 @@ export function LoginForm() {
           </FormContainer>
           <Marginer direction="vertical" margin="1em" />
           <MutedLink href="#">Forgot your password?</MutedLink>
-          <Marginer direction="vertical" margin="1.6em" />
+          <Marginer direction="vertical" margin="1em" />
           <MutedLink href="#">Don&apos;t have an account? <BoldLink href="#" onClick={console.log("switchToSignup")}>Sign Up</BoldLink></MutedLink>
+          <Marginer direction="vertical" margin="2em" />
         </BoxContainer>
       </CardBody>
     </Card>

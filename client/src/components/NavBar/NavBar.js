@@ -4,20 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { logUserOut } from "../../reducers/loginReducer";
 
 import {
+  Switch,
   Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Text,
-  Tooltip,
   Avatar,
-  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   MenuGroup,
+  IconButton,
+  Text,
+  Flex,
 } from "@chakra-ui/react";
 
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-const NavBar = () => {
+import "./navStyles.css";
+
+const NavBar = ({ name, isDarkMode, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,55 +33,45 @@ const NavBar = () => {
   };
 
   return (
-    <Box>
-      <Flex alignItems="center" py={2}>
-        <Box display={{ base: "block", md: "none" }}>
-          <IconButton
-            size="md"
-            fontSize="lg"
+    <Flex className="navBox" alignItems="center" py={2}>
+      <Box display={{ base: "block", md: "none" }}>
+        <Menu>
+          <MenuButton
+            as={IconButton}
             aria-label="Open menu"
             icon={<HamburgerIcon />}
+            variant="outline"
             onClick={() => setIsOpen(!isOpen)}
           />
-          <Menu
-            onClose={() => setIsOpen(false)}
-            isOpen={isOpen}
-            placement="bottom-end"
-          >
+          <MenuList onClose={() => setIsOpen(false)} isOpen={isOpen}>
             <MenuItem as={Link} to="/" onClick={() => setIsOpen(false)}>
               Blogs
             </MenuItem>
-            <MenuItem
-              as={Link}
-              to="/users"
-              onClick={() => setIsOpen(false)}
-            >
+            <MenuItem as={Link} to="/users" onClick={() => setIsOpen(false)}>
               Users
             </MenuItem>
-          </Menu>
-        </Box>
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip label="Open settings">
-            <IconButton onClick={console.log("handleOpenUserMenu")} sx={{ p: 0 }}>
-              <Avatar />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            placement="bottom-end"
-          >
-            <MenuGroup title="User">
+          </MenuList>
+        </Menu>
+      </Box>
+      <Box sx={{ flexGrow: 0 }}>
+        <Menu placement="bottom-end">
+          <MenuButton
+            as={IconButton}
+            sx={{ p: 0 }}
+            aria-label="User options"
+            icon={<Avatar id="avatar" />}
+          />
+          <MenuList id="menu-appbar">
+            <MenuGroup title={name}>
               <MenuItem onClick={handleLogout}>
-                <Text textAlign="center">
-                  Logout
-                </Text>
+                <Text textAlign="center">Logout</Text>
               </MenuItem>
             </MenuGroup>
-          </Menu>
-        </Box>
-      </Flex>
-    </Box>
+          </MenuList>
+          <Switch isChecked={isDarkMode} onChange={toggleTheme} />
+        </Menu>
+      </Box>
+    </Flex>
   );
 };
 

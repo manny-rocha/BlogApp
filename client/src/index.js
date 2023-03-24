@@ -6,16 +6,12 @@ import App from "./App";
 import "./index.css";
 import store from "./store";
 
-import { ChakraProvider } from "@chakra-ui/react";
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div className="baseLayer">
-    <ChakraProvider>
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    </ChakraProvider>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </div>
 );

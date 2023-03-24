@@ -10,9 +10,9 @@ const BlogList = () => {
   const sortedBlogs = orderBy(blogs, ["likes"], ["desc"]);
 
   return (
-    <Box>
-      <Table>
-        <Thead>
+    <Box w="100%" bg="white" borderRadius="md" boxShadow="md" overflow="hidden">
+      <Table variant="simple">
+        <Thead bg="gray.100">
           <Tr>
             <Th>Title</Th>
             <Th>Author</Th>

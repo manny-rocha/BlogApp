@@ -1,6 +1,8 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { Button } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { ImCancelCircle } from "react-icons/im";
 
 const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);
@@ -22,9 +24,9 @@ const Togglable = forwardRef((props, ref) => {
     <div id="new-blog-btn">
       <div style={hideWhenVisible}>
         <Button
-          variant="contained"
-          color="success"
-          size="small"
+          variant="outline"
+          colorScheme="teal"
+          rightIcon={<ArrowForwardIcon />}
           onClick={toggleVisibility}
         >
           {props.buttonLabel}
@@ -33,12 +35,12 @@ const Togglable = forwardRef((props, ref) => {
       <div style={showWhenVisible}>
         {props.children}
         <Button
-          variant="contained"
-          color="warning"
-          size="small"
+          variant="outline"
+          color="teal"
+          rightIcon={<ImCancelCircle />}
           onClick={toggleVisibility}
         >
-          cancel
+          Cancel
         </Button>
       </div>
     </div>

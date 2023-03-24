@@ -1,20 +1,38 @@
-import { useState } from "react";
+import { React, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../reducers/blogReducer";
 import { Input } from "../accountBox/common";
-import { Button } from "@chakra-ui/react";
 
-// import "./formStyles.css";
+import { AddIcon } from "@chakra-ui/icons";
 
-const BlogForm = ({ togglableRef }) => {
+import {
+  useDisclosure,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+  FormLabel,
+  Box,
+  Button,
+  Stack,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
+
+const BlogForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
   const dispatch = useDispatch();
 
   const handleCreateBlog = async (event) => {
     event.preventDefault();
-    togglableRef.current.toggleVisibility();
 
     const newBlog = {
       title,
@@ -31,30 +49,72 @@ const BlogForm = ({ togglableRef }) => {
 
 
   return (
-    <div className="blogForm">
-      <h2>Create new blog</h2>
-      <form onSubmit={handleCreateBlog}>
-        <div>
-          <span className="p-float-label">
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <label htmlFor="title">Title</label>
-          </span>
-        </div>
-        <div>
-          <span className="p-float-label">
-            <Input id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
-            <label htmlFor="author">Author</label>
-          </span>
-        </div>
-        <div>
-          <span className="p-float-label">
-            <Input id="url" value={url} onChange={(e) => setUrl(e.target.value)} />
-            <label htmlFor="url">URL</label>
-          </span>
-        </div>
-        <Button label="Create" className="p-button-raised p-button-primary" type="submit" />
-      </form>
-    </div>
+    <>
+      <Button leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
+        Add Blog
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        initialFocusRef={firstField}
+        onClose={onClose}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth='1px'>
+            Add a new blog
+          </DrawerHeader>
+
+          <DrawerBody>
+            <Stack spacing='24px'>
+              <Box>
+                <FormLabel htmlFor='title'>Title</FormLabel>
+                <Input
+                  ref={firstField}
+                  value={title}
+                  placeholder='Please enter title'
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor='desc'>Author</FormLabel>
+                <Input
+                  id={author}
+                  value={author}
+                  placeholder='Please enter author'
+                  onChange={(e) => setAuthor(e.target.value)}
+                />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor='url'>Url</FormLabel>
+                <InputGroup>
+                  <InputLeftAddon>http://</InputLeftAddon>
+                  <Input
+                    type='url'
+                    id='url'
+                    value={url}
+                    placeholder='Please enter domain'
+                    onChange={(e) => setUrl(e.target.value)}
+                  />
+                  <InputRightAddon>.com</InputRightAddon>
+                </InputGroup>
+              </Box>
+
+            </Stack>
+          </DrawerBody>
+
+          <DrawerFooter borderTopWidth='1px'>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='teal' onClick={handleCreateBlog}>Submit</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 

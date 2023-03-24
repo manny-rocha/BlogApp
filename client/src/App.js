@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-
 import BlogList from "./components/Blog/BlogList";
 import LoginForm from "./components/accountBox/loginForm";
 import Notification from "./components/Notification/Notification";
@@ -10,9 +9,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Blog from "./components/Blog/Blog";
 import Users from "./components/User/Users";
 import User from "./components/User/User";
-import Togglable from "./components/Togglable/Togglable";
 import BlogForm from "./components/Forms/BlogForm";
-import Greeting from "./components/Greeting/Greeting";
 
 import userService from "./services/users";
 
@@ -21,8 +18,8 @@ import { initializeUsers } from "./reducers/userReducer";
 import { initializeBlogs } from "./reducers/blogReducer";
 
 const App = () => {
-  const blogFormRef = useRef();
   const dispatch = useDispatch();
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const user = useSelector((state) => state.login);
 
@@ -42,21 +39,24 @@ const App = () => {
     return <LoginForm />;
   }
 
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <Container>
-      <NavBar />
-      <Greeting name={user.name} />
-      <Notification />
-      <Togglable buttonLabel="new blog" ref={blogFormRef}>
-        <BlogForm togglableRef={blogFormRef} />
-      </Togglable>
-      <Routes>
-        <Route path="/" element={<BlogList />} />
-        <Route path="/blogs/:id" element={<Blog />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/:id" element={<User />} />
-      </Routes>
-    </Container>
+    <ChakraProvider>
+      <ColorModeProvider value={isDarkMode ? "dark" : "light"}>
+        <NavBar name={user.name} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+        <Notification />
+        <BlogForm />
+        <Routes>
+          <Route path="/" element={<BlogList />} />
+          <Route path="/blogs/:id" element={<Blog />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<User />} />
+        </Routes>
+      </ColorModeProvider>
+    </ChakraProvider>
   );
 };
 
