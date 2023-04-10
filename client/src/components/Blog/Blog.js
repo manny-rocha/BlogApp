@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
-import { likeBlog, deleteBlog } from "../../reducers/blogReducer";
-import Comments from "../Comments/Comments";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, CardHeader, Heading } from '@chakra-ui/react';
+import { likeBlog, deleteBlog } from '../../reducers/blogReducer';
+import Comments from '../Comments/Comments';
 
 const Blog = () => {
   const { id } = useParams();
@@ -23,20 +24,20 @@ const Blog = () => {
   const handleDelete = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
       dispatch(deleteBlog(blog));
-      navigate("/");
+      navigate('/');
     }
   };
 
   return (
-    <div>
-      <h2>
-        {blog.title} - {blog.author}
-      </h2>
+    <Card>
+      <CardHeader>
+        <Heading as='h2'>{blog.title} | {blog.author}</Heading>
+      </CardHeader>
       <div className="blog-details">
         <a href={blog.url}>{blog.url}</a>
       </div>
       <div className="blog-details">
-        {blog.likes} likes{" "}
+        {blog.likes} likes{' '}
         <Button
           variant="contained"
           color="primary"
@@ -44,7 +45,7 @@ const Blog = () => {
           onClick={handleLike}
         >
           Like
-        </Button>{" "}
+        </Button>{' '}
         {user.username === blog.user.username && (
           <Button
             variant="contained"
@@ -60,7 +61,7 @@ const Blog = () => {
         Added by <strong>{blog.user.name}</strong>
       </div>
       <Comments blog={blog} />
-    </div>
+    </Card>
   );
 };
 
