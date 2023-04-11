@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logUserOut } from "../../reducers/loginReducer";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logUserOut } from '../../reducers/loginReducer';
 
 import {
   Switch,
@@ -15,11 +15,11 @@ import {
   IconButton,
   Text,
   Flex,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from '@chakra-ui/icons';
 
-import "./navStyles.css";
+import './navStyles.css';
 
 const NavBar = ({ name, isDarkMode, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,12 +29,12 @@ const NavBar = ({ name, isDarkMode, toggleTheme }) => {
 
   const handleLogout = () => {
     dispatch(logUserOut());
-    navigate("/");
+    navigate('/');
   };
 
   return (
     <Flex className="navBox" alignItems="center" py={2}>
-      <Box display={{ base: "block", md: "none" }}>
+      <Box display={{ base: 'block', md: 'none' }}>
         <Menu>
           <MenuButton
             as={IconButton}

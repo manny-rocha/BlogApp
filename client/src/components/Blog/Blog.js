@@ -1,9 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardHeader, Heading } from '@chakra-ui/react';
+import { Button, Card, CardHeader, CardBody, Heading, Text, CardFooter, Link } from '@chakra-ui/react';
 import { likeBlog, deleteBlog } from '../../reducers/blogReducer';
 import Comments from '../Comments/Comments';
+
+import './styles.css';
+
 
 const Blog = () => {
   const { id } = useParams();
@@ -29,15 +32,17 @@ const Blog = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <Heading as='h2'>{blog.title} | {blog.author}</Heading>
+    <Card className='container' pl={2} w='100%' mt={2}>
+      <CardHeader className='heading'>
+        <Heading as='h2'>{blog.title}</Heading>
       </CardHeader>
       <div className="blog-details">
-        <a href={blog.url}>{blog.url}</a>
+        <Text>Author: {blog.author}</Text>
+        <Text>URL: <Link href={blog.url}>{blog.url}</Link></Text>
+        <Text>Likes: {blog.likes}</Text>
       </div>
-      <div className="blog-details">
-        {blog.likes} likes{' '}
+      <div className="blog-buttons">
+        {' '}
         <Button
           variant="contained"
           color="primary"
@@ -61,7 +66,7 @@ const Blog = () => {
         Added by <strong>{blog.user.name}</strong>
       </div>
       <Comments blog={blog} />
-    </Card>
+    </Card >
   );
 };
 

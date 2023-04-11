@@ -1,10 +1,13 @@
-import { useField } from "../../hooks/index";
-import { useDispatch } from "react-redux";
-import { createComment } from "../../reducers/blogReducer";
-import { Button, Grid, Textarea } from "@chakra-ui/react";
+import React from 'react';
+import { useField } from '../../hooks/index';
+import { useDispatch } from 'react-redux';
+import { createComment } from '../../reducers/blogReducer';
+import {
+  Button, FormControl, FormLabel, Grid, Heading, Textarea, List, ListItem, ListIcon, UnorderedList
+} from '@chakra-ui/react';
 
 const Comments = ({ blog }) => {
-  const { reset: resetComment, ...comment } = useField("text");
+  const { reset: resetComment, ...comment } = useField('text');
 
   const dispatch = useDispatch();
 
@@ -20,30 +23,30 @@ const Comments = ({ blog }) => {
   };
 
   return (
-    <div>
-      <h3>comments</h3>
-      <form onSubmit={handleComment}>
+    <>
+      <FormControl pl={2} pr={2} onSubmit={handleComment}>
+        <FormLabel>Comments</FormLabel>
         <Grid container>
           <Grid item>
-            <Textarea label="write your thoughts" size="small" {...comment} />
+            <Textarea placeholder="Write your thoughts" size="md" {...comment} />
           </Grid>
-          <Grid item alignItems="stretch" style={{ display: "flex" }}>
+          <Grid item alignItems="stretch" style={{ display: 'flex' }}>
             <Button variant="contained" color="primary" type="submit">
-              add comment
+              Add comment
             </Button>
           </Grid>
         </Grid>
-      </form>
+      </FormControl>
       {comments.length > 0 ? (
-        <ul>
+        <UnorderedList>
           {comments.map((comment, i) => (
-            <li key={i}>{comment}</li>
+            <ListItem key={i}>{comment}</ListItem>
           ))}
-        </ul>
+        </UnorderedList>
       ) : (
-        <p>no comments yet...</p>
+        <p>No comments yet...</p>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,11 @@
-import { React, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { createBlog } from "../../reducers/blogReducer";
-import { Input } from "../accountBox/common";
+import { React, useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { createBlog } from '../../reducers/blogReducer';
+import { Input } from '../accountBox/common';
 
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon } from '@chakra-ui/icons';
+
+import './styles.css'
 
 import {
   useDisclosure,
@@ -21,12 +23,12 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const BlogForm = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [url, setUrl] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
   const dispatch = useDispatch();
@@ -40,9 +42,9 @@ const BlogForm = () => {
       url,
     };
 
-    setTitle("");
-    setAuthor("");
-    setUrl("");
+    setTitle('');
+    setAuthor('');
+    setUrl('');
 
     dispatch(createBlog(newBlog));
   };
@@ -50,7 +52,7 @@ const BlogForm = () => {
 
   return (
     <>
-      <Button leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
+      <Button top={0} leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
         Add Blog
       </Button>
       <Drawer
