@@ -1,20 +1,20 @@
-const User = require("../models/user");
-const logger = require("./logger");
-const jwt = require("jsonwebtoken");
+import User from "../models/user.js";
+import { info, error } from "./logger.js";
+import jwt from "jsonwebtoken";
 
-const requestLogger = (request, response, next) => {
-  logger.info("Method:", request.method);
-  logger.info("Path:  ", request.path);
-  logger.info("Body:  ", request.body);
-  logger.info("---");
+export const requestLogger = (request, response, next) => {
+  info("Method:", request.method);
+  info("Path:  ", request.path);
+  info("Body:  ", request.body);
+  info("---");
   next();
 };
 
-const unknownEndpoint = (request, response) => {
+export const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
 
-const errorHandler = (error, request, response, next) => {
+export const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
   } else if (error.name === "ValidationError") {
@@ -25,12 +25,12 @@ const errorHandler = (error, request, response, next) => {
     return response.status(401).json({ error: "expired token" });
   }
 
-  logger.error(error.message);
+  error(error.message);
 
   next(error);
 };
 
-const tokenExtractor = (request, response, next) => {
+export const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
     request.token = authorization.substring(7);
@@ -39,7 +39,7 @@ const tokenExtractor = (request, response, next) => {
   next();
 };
 
-const userExtractor = async (request, response, next) => {
+export const userExtractor = async (request, response, next) => {
   const token = request.token;
   if (token) {
     const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -50,10 +50,11 @@ const userExtractor = async (request, response, next) => {
   next();
 };
 
-module.exports = {
+export default {
   requestLogger,
   unknownEndpoint,
   errorHandler,
   tokenExtractor,
   userExtractor,
 };
+

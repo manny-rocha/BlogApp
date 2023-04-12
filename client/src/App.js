@@ -10,6 +10,7 @@ import Blog from "./components/Blog/Blog";
 import Users from "./components/User/Users";
 import User from "./components/User/User";
 import BlogForm from "./components/Forms/BlogForm";
+import { darkTheme, lightTheme } from "./theme";
 
 import userService from "./services/users";
 
@@ -45,7 +46,7 @@ const App = () => {
 
   return (
     <ChakraProvider>
-      <ColorModeProvider value={isDarkMode ? "dark" : "light"}>
+      <ColorModeProvider value={isDarkMode ? darkTheme : lightTheme}>
         <NavBar name={user.name} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <Notification />
         <BlogForm />

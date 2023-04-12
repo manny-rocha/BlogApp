@@ -41,17 +41,34 @@ export function LoginForm() {
     <Card className="loginCard">
       <CardBody className="loginBody">
         <BoxContainer>
-          <FormContainer onSubmit={handleLogin}>
+          <FormContainer>
             <Marginer direction="vertical" margin="3em" />
-            <Input name="username" type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
-            <Input name="password" type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+            <Input
+              name="username"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
             <Marginer direction="vertical" margin="1em" />
-            <SubmitButton type="submit">Login</SubmitButton>
+            <SubmitButton type="submit" onClick={handleLogin}>
+              Login
+            </SubmitButton>
           </FormContainer>
           <Marginer direction="vertical" margin="1em" />
           <MutedLink href="#">Forgot your password?</MutedLink>
           <Marginer direction="vertical" margin="1em" />
-          <MutedLink href="#">Don&apos;t have an account? <BoldLink href="#" onClick={console.log("switchToSignup")}>Sign Up</BoldLink></MutedLink>
+          <MutedLink href="#">
+            Don&apos;t have an account?{" "}
+            <BoldLink href="#">Sign Up</BoldLink>
+          </MutedLink>
           <Marginer direction="vertical" margin="2em" />
         </BoxContainer>
       </CardBody>

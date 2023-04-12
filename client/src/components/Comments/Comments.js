@@ -1,13 +1,13 @@
-import { useField } from "../../hooks/index";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createComment } from "../../reducers/blogReducer";
-import { Button, FormControl, FormLabel, Grid, Text, Textarea, UnorderedList, ListItem } from "@chakra-ui/react";
-import { FormContainer } from "../accountBox/common.jsx";
-
+import React from 'react';
+import { useField } from '../../hooks/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { createComment } from '../../reducers/blogReducer';
+import {
+  Button, FormControl, FormLabel, Grid, Heading, Textarea, List, ListItem, ListIcon, UnorderedList
+} from '@chakra-ui/react';
 
 const Comments = ({ blog }) => {
-  const { reset: resetComment, ...comment } = useField("text");
+  const { reset: resetComment, ...comment } = useField('text');
 
   const dispatch = useDispatch();
 
@@ -25,39 +25,30 @@ const Comments = ({ blog }) => {
   };
 
   return (
-    <div>
-      <Text as="h3" fontSize="xl" fontWeight="semibold">Comments</Text>
-      <FormContainer onSubmit={handleComment}>
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+    <>
+      <FormControl pl={2} pr={2} onSubmit={handleComment}>
+        <FormLabel>Comments</FormLabel>
+        <Grid container>
           <Grid item>
-            <FormControl id="comment">
-              <FormLabel>Write your thoughts</FormLabel>
-              <Textarea {...comment} resize="both" />
-            </FormControl>
+            <Textarea placeholder="Write your thoughts" size="md" {...comment} />
           </Grid>
-          <Grid item alignSelf="flex-end">
-            <Button variant="solid" colorScheme="teal" type="submit">
+          <Grid item alignItems="stretch" style={{ display: 'flex' }}>
+            <Button variant="contained" color="primary" type="submit">
               Add comment
             </Button>
           </Grid>
         </Grid>
-      </FormContainer>
+      </FormControl>
       {comments.length > 0 ? (
-        <UnorderedList mt={4}>
+        <UnorderedList>
           {comments.map((comment, i) => (
-            <React.Fragment key={i}>
-              <ListItem>{comment.content}</ListItem>
-              <Text as="h4" fontSize="md" fontWeight="semibold">
-                Added by {comment.user.name}
-              </Text>
-            </React.Fragment>
+            <ListItem key={i}>{comment}</ListItem>
           ))}
         </UnorderedList>
       ) : (
-        <Text mt={4}>No comments yet...</Text>
+        <p>No comments yet...</p>
       )}
-
-    </div>
+    </>
   );
 };
 

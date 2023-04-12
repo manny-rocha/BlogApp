@@ -1,9 +1,11 @@
-const config = require("../utils/config");
-const blogsRouter = require("express").Router();
-const Blog = require("../models/blog");
-const middleware = require("../utils/middleware");
-const User = require("../models/user");
-const jwt = require("jsonwebtoken");
+import * as config from "../utils/config.js";
+import { Router } from "express";
+import Blog from "../models/blog.js";
+import middleware from "../utils/middleware.js";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
+
+const blogsRouter = Router();
 
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 });
@@ -95,4 +97,4 @@ blogsRouter.put("/:id", async (request, response) => {
     : response.status(404).end();
 });
 
-module.exports = blogsRouter;
+export default blogsRouter;

@@ -1,35 +1,32 @@
-/* eslint-env node */
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    "jest/globals": true,
-  },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: "module",
-  },
-  plugins: ["react", "jest"],
-  rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "double"],
-    semi: ["error", "always"],
-    eqeqeq: "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": ["error", "always"],
-    "arrow-spacing": ["error", { before: true, after: true }],
-    "no-console": 0,
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["react", "import", "jsx-a11y"],
+  "rules": {
     "react/prop-types": 0,
-    "react/react-in-jsx-scope": "off",
+    "indent": ["error", 2],
+    "linebreak-style": 1,
+    "quotes": ["error", "single"]
   },
-  settings: {
-    react: {
-      version: "detect",
-    },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-};
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

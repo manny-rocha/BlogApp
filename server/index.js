@@ -1,10 +1,11 @@
-const app = require("./app");
-const http = require("http");
-const config = require("./utils/config");
-const logger = require("./utils/logger");
+import app from "./app.js";
+import { createServer } from "http";
+import * as config from "./utils/config.js";
+import { info } from "./utils/logger.js";
 
-const server = http.createServer(app);
+const server = createServer(app);
+const PORT = config.PORT;
 
-server.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`);
+server.listen(PORT, () => {
+  info(`Server running on port ${PORT}`);
 });
