@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, Heading, Link, Text } from "@chakra-ui/react";
 import { likeBlog, deleteBlog } from "../../reducers/blogReducer";
 import Comments from "../Comments/Comments";
 
@@ -28,38 +28,30 @@ const Blog = () => {
   };
 
   return (
-    <div>
-      <h2>
+    <div className="contentContainer" >
+      <Heading size="lg">
         {blog.title} - {blog.author}
-      </h2>
-      <div className="blog-details">
-        <a href={blog.url}>{blog.url}</a>
-      </div>
-      <div className="blog-details">
+      </Heading>
+      <Text className="blog-details">
+        <Link href={blog.url} isExternal>
+          {blog.url}
+        </Link>
+      </Text>
+      <Text className="blog-details">
         {blog.likes} likes{" "}
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          onClick={handleLike}
-        >
+        <Button size="sm" colorScheme="blue" onClick={handleLike}>
           Like
         </Button>{" "}
         {user.username === blog.user.username && (
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            onClick={handleDelete}
-          >
+          <Button size="sm" colorScheme="red" onClick={handleDelete}>
             Delete
           </Button>
         )}
-      </div>
-      <div className="blog-details">
+      </Text>
+      <Text className="blog-details">
         Added by <strong>{blog.user.name}</strong>
-      </div>
-      <Comments blog={blog} />
+      </Text>
+      <Comments blog={blog} user={user} />
     </div>
   );
 };

@@ -110,6 +110,7 @@ export const createComment = (id, comment) => {
           5
         )
       );
+      return commentedBlog; // return updated blog object
     } catch (error) {
       dispatch(
         createNotification(
@@ -117,8 +118,12 @@ export const createComment = (id, comment) => {
           5
         )
       );
+      throw error;
     }
   };
 };
+
+
+
 
 export default blogSlice.reducer;

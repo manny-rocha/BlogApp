@@ -50,7 +50,7 @@ const BlogForm = () => {
 
   return (
     <>
-      <Button leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
+      <Button id="blogFormButton" leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
         Add Blog
       </Button>
       <Drawer
